@@ -1,4 +1,7 @@
+ {-# LANGUAGE ViewPatterns #-}
+
 module Ninetynine where
+
 
 someFunc :: IO ()
 someFunc = putStrLn "someFunc"
@@ -13,9 +16,9 @@ myButLast (a:b:[]) = a
 myButLast (a:as) = myButLast as
 myButLast _ = error "empty list"
 
-myElementAt :: [a] -> Int -> a
-myElementAt (a:_) 1 = a
-myElementAt (_:as) n = myElementAt as (n-1)
+elementAt :: [a] -> Int -> a
+elementAt (a:_) 1 = a
+elementAt (_:as) n = elementAt as (n-1)
 
 myLength :: [a] -> Int
 myLength [] = 0
