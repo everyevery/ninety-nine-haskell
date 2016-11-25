@@ -31,4 +31,4 @@ test-suite spec
 
 source-repository head
   type:     git
-  location: https://github.com/githubuser/ninety-nine-haskell
+  location: https://github.com/everyevery/ninety-nine-haskell
