@@ -15,9 +15,19 @@ cabal-version:       >=1.10
 
 library
   hs-source-dirs:      src
-  exposed-modules:     Lib
+  exposed-modules:     Ninetynine
   build-depends:       base >= 4.7 && < 5
   default-language:    Haskell2010
+
+test-suite spec
+  hs-source-dirs:      test
+  main-is:             Spec.hs
+  ghc-options:          -Wall
+  default-language:    Haskell2010
+  type:                exitcode-stdio-1.0
+  build-depends:       base >= 4.7 && < 5
+                     , ninety-nine-haskell
+                     , hspec >= 2.0 && < 3
 
 source-repository head
   type:     git
