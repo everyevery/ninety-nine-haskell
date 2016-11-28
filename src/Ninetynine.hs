@@ -26,3 +26,11 @@ myLength (a:as) = 1 + myLength as
 
 myReverse :: [a] -> [a]
 myReverse = foldl (flip (:)) []
+
+isPalindrome :: Eq a => [a] -> Bool
+isPalindrome a = a == (myReverse a)
+
+data NestedList a = Elem a | List [NestedList a]
+flatten :: NestedList a -> [a]
+flatten (Elem a) = [a]
+flatten (List as) = concat $ map flatten as

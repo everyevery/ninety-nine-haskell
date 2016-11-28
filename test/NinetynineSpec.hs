@@ -18,3 +18,14 @@ spec = do
   describe "myReverse" $ do
     it "reverse a list" $ property $
       \xs -> (myReverse . myReverse) xs == (xs :: [Int])
+
+  describe "isPalindrome" $ do
+    it "Find out whether a list is a palindrome" $ do
+      isPalindrome [1,2,3] `shouldBe` False
+
+  describe "flatten" $ do
+    it "Flatten a nested list structure" $ do
+      flatten (List [Elem 1, List [Elem 2, List [Elem 3, Elem 4], Elem 5]]) `shouldBe` [1,2,3,4,5]
+--      flatten (List []) `shouldBe` []
+--      flatten (Elem 5) `shouldBe` [5]
+
