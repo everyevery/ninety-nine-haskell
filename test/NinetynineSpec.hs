@@ -56,3 +56,23 @@ spec = parallel $ do
     it "Flatten a empty list structure" $ do
       (flatten (List []) :: [Integer]) `shouldBe` ([] :: [Integer])
 
+  describe "compress" $ do
+    it "Eliminate consecutive duplicates of list elements" $ do
+      compress "aaaabccaadeeee" `shouldBe` "abcade"
+  describe "pack" $ do
+    it "Packconsecutive duplicates of list elements into sublists" $ do
+      pack "aaabbcaabcc" `shouldBe` ["aaa","bb","c","aa","b","cc"]
+  describe "encode" $ do
+    it "Run-length encoding of a list" $ do
+      encode "aaaabccaadeeee" `shouldBe` [(4,'a'),(1,'b'),(2,'c'),(2,'a'),(1,'d'),(4,'e')]
+      
+  describe "encodeModified" $ do
+    it "Run-length encoding of a list. If there is non duplication, just copy" $ do
+      encodeModified "aaaabccaadeeee" `shouldBe` [Multiple 4 'a',Single 'b',Multiple 2 'c', Multiple 2 'a',Single 'd',Multiple 4 'e']
+
+  describe "decodeModified" $ do
+    it "Decode a run-length encoded list" $ do
+      decodeModified [Multiple 4 'a',Single 'b',Multiple 2 'c', Multiple 2 'a',Single 'd',Multiple 4 'e'] `shouldBe` "aaaabccaadeeee" 
+
+
+

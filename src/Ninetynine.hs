@@ -2,6 +2,8 @@
 
 module Ninetynine where
 
+import Data.List
+
 
 someFunc :: IO ()
 someFunc = putStrLn "someFunc"
@@ -34,3 +36,28 @@ data NestedList a = Elem a | List [NestedList a]
 flatten :: NestedList a -> [a]
 flatten (Elem a) = [a]
 flatten (List as) = concat $ map flatten as
+
+compress [] = []
+compress xs = map head (group xs)
+
+pack :: Eq a => [a] -> [[a]]
+pack [] = []
+pack xss@(x:xs) = takeWhile (== x) xss : (pack $ dropWhile (== x) xss)
+
+
+encode :: Eq a => [a] -> [(Int, a)]
+encode [] = []
+encode xs = map (\x -> (length x, head x)) $ pack xs
+
+data Encoded a = Multiple Int a | Single a deriving (Show, Eq)
+
+encodeModified :: Eq a => [a] -> [Encoded a]
+encodeModified = map convertToEncoded  . encode
+                    where convertToEncoded (1, c) = Single c
+                          convertToEncoded (n, c) = Multiple n c
+
+decodeModified :: [Encoded a] -> [a]
+decodeModified = concatMap helper 
+                    where helper (Single c) = [c]
+                          helper (Multiple n c) = replicate n c 
+
