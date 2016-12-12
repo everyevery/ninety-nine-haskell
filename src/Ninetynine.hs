@@ -61,3 +61,18 @@ decodeModified = concatMap helper
                     where helper (Single c) = [c]
                           helper (Multiple n c) = replicate n c 
 
+dupli :: [a] -> [a]
+dupli xs  = concatMap (\x -> [x,x]) xs
+
+repli :: [a] -> Int -> [a]
+repli xs n = concatMap (replicate n) xs
+
+dropEvery :: [a] -> Int -> [a]
+dropEvery [] _ = []
+dropEvery xs n = let (f, s) =  splitAt n' xs
+                     n' = n - 1
+                     s' = if length s == 0 then [] else (tail s)
+                 in f ++ (dropEvery s' n)
+
+split' :: [a] -> Int -> ([a], [a])
+split' xs n = (take n xs, drop n xs)

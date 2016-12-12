@@ -74,5 +74,15 @@ spec = parallel $ do
     it "Decode a run-length encoded list" $ do
       decodeModified [Multiple 4 'a',Single 'b',Multiple 2 'c', Multiple 2 'a',Single 'd',Multiple 4 'e'] `shouldBe` "aaaabccaadeeee" 
 
+  describe "dupli" $ do 
+    it "Duplicate the elements of a list." $ do
+      dupli [1,2,3] `shouldBe` [1,1,2,2,3,3]
 
+  describe "repli" $ do 
+    it "Replicate the elements of a list a given number of times." $ do
+      repli [1,2,3] 3 `shouldBe` [1,1,1,2,2,2,3,3,3]
+      
+  describe "dropEvery" $ do 
+    it "Drop every N'th element from a list." $ do
+      dropEvery "abcdefghik" 3 `shouldBe` "abdeghk"
 
