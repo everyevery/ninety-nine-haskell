@@ -76,3 +76,30 @@ dropEvery xs n = let (f, s) =  splitAt n' xs
 
 split' :: [a] -> Int -> ([a], [a])
 split' xs n = (take n xs, drop n xs)
+
+slice' :: [a] -> Int -> Int -> [a]
+slice' [] _ _ = []
+slice' xs s e = drop (s - 1) $ take e xs
+
+rotate :: [a] -> Int -> [a]
+rotate xs n
+  | n == 0 = xs
+  | n > 0 = let (front,back) = split' xs n in back ++ front
+  | otherwise = let (front, back) = split' xs (length xs + n) in back ++ front
+
+remove_at :: [a] -> Int -> [a]
+remove_at xs n
+  | n < 0 = xs
+  | otherwise = let (h, t) = splitAt n xs in init h ++ t
+
+insert_at :: a -> [a] -> Int -> [a]
+insert_at v xs i = take (i-1) xs ++ [v] ++ drop (i-1) xs
+
+
+
+
+
+
+
+
+

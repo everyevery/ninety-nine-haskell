@@ -86,3 +86,19 @@ spec = parallel $ do
     it "Drop every N'th element from a list." $ do
       dropEvery "abcdefghik" 3 `shouldBe` "abdeghk"
 
+  describe "slice'" $ do
+    it "Extract a slice from a list." $ do
+      slice' [1,2,3,4,5,6,7, 8, 9] 4 7 `shouldBe` [4, 5, 6, 7]
+    
+  describe "rotate" $ do
+    it "Rotate a list N places to the lieft" $ do
+      rotate ['a','b','c','d','e','f','g','h'] 3 `shouldBe` "defghabc"
+      rotate ['a','b','c','d','e','f','g','h'] (-2) `shouldBe` "ghabcdef"
+
+  describe "remove the K'th element" $ do
+    it "Remove the K'th element from a list." $ do
+      remove_at [1,2,3,4] 2 `shouldBe` [1,3,4]
+
+  describe "InsertAt" $ do
+    it "Insert an element a a given position" $ do
+      insert_at 4 [1,2,3,5] 4 `shouldBe` [1,2,3,4,5] 
