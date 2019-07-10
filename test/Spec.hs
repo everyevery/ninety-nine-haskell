@@ -41,3 +41,6 @@ main = hspec $ before_ beforeHook $ do
     it "tlatten a nested list structure" $ do
       flatten (List' [Elem 2, List' [Elem 3, Elem 4, List' [Elem 5], List' [Elem 6]]]) `shouldBe` [2,3,4,5, 6]
       flatten (Elem 3) `shouldBe` [3]
+  describe "compress" $
+    it "eleminate consecutive duplicates of list elements" $
+      compress "aaaabccaadeeee" `shouldBe` "abcade"

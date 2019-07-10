@@ -44,3 +44,7 @@ data NestedList a = Elem a | List' [NestedList a]
 flatten :: NestedList a -> [a]
 flatten (Elem x) = [x]
 flatten (List' x) = concatMap flatten x
+
+compress :: Eq a => [a] -> [a]
+compress [] = []
+compress (x:xs) = x : compress (dropWhile (==x) xs)
